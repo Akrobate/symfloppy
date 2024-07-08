@@ -1,0 +1,139 @@
+#include <Arduino.h>
+// #include <Adafruit_PCD8544.h>
+
+const byte pinLed = 4;
+
+// const byte sclk_pin = 2; // D4
+// const byte din_pin = 16; // D0
+// const byte dc_pin = 14; // D5
+// const byte cs_pin = 12; // D6
+// const byte rst_pin = 15; // D8
+
+const byte rx_pin = 13; // D8
+
+// Adafruit_PCD8544 lcd = Adafruit_PCD8544(sclk_pin, din_pin, dc_pin, cs_pin, rst_pin);
+
+byte commandByte;
+byte noteByte;
+byte velocityByte;
+
+byte testByte;
+
+byte noteOn = 144;
+
+
+
+
+void setup() {
+
+    delay(500);
+    Serial.begin(31250);
+    delay(500);
+    Serial.swap();
+    delay(500);
+
+
+    pinMode(pinLed, OUTPUT);
+    // pinMode(rx_pin, INPUT);
+
+    // while (Serial.available()) {
+    //     Serial.read();
+    // }
+
+    digitalWrite(pinLed, HIGH);
+    delay(500);
+    digitalWrite(pinLed, LOW);
+    delay(500);
+
+    digitalWrite(pinLed, HIGH);
+    delay(100);
+    digitalWrite(pinLed, LOW);
+    delay(100);
+    digitalWrite(pinLed, HIGH);
+    delay(100);
+    digitalWrite(pinLed, LOW);
+    delay(100);
+    //lcd.begin();
+    //lcd.setContrast(50);
+    //lcd.setRotation(2);
+    //lcd.clearDisplay();
+    //lcd.print("Coucou\n");
+    //lcd.print("Coucou2\n");
+    //lcd.print("Coucou3\n");
+    //lcd.print("Coucou4\n");
+    //lcd.print("Coucou5\n");
+    //lcd.display();
+
+}
+
+
+/*
+void checkMIDI(){
+  do{
+    if (Serial.available()){
+        digitalWrite(pinLed, HIGH);
+        
+        commandByte = Serial.read();//read first byte
+        noteByte = Serial.read();//read next byte
+        velocityByte = Serial.read();//read final byte
+        testByte = 123;
+
+        // lcd.clearDisplay();
+        // lcd.print("testb: " + String(testByte) + "\n");
+        // lcd.print("cmd: " + String(commandByte) + "\n");
+        // lcd.print("note: " + String(noteByte) + "\n");
+        // lcd.print("velo: " + String(velocityByte) + "\n");
+        // lcd.display();
+
+        
+        if (noteByte == 60){
+            digitalWrite(pinLed,HIGH);//turn on led
+        }
+
+        if (commandByte == noteOn){//if note on message
+            digitalWrite(pinLed, HIGH);
+            //check if note == 60 and velocity > 0
+            if (noteByte == 60 && velocityByte > 0){
+                digitalWrite(pinLed,HIGH);//turn on led
+            }
+        }
+        
+
+    }
+  }
+  while (Serial.available() > 2);//when at least three bytes available
+}
+
+
+*/
+
+void loop() {
+  // checkMIDI();
+
+  if (Serial.available() > 2){
+    digitalWrite(pinLed, HIGH);
+    // testByte = Serial.read();
+    
+    commandByte = Serial.read();//read first byte
+    noteByte = Serial.read();//read next byte
+    velocityByte = Serial.read();//read final byte
+    // Serial.write(testByte);
+    
+    // delay(100);
+    
+    
+    Serial.write(commandByte);
+    Serial.write(noteByte);
+    Serial.write(velocityByte);
+
+    digitalWrite(pinLed, LOW);
+  }
+
+  // Serial.write(123);
+  // delay(1000);
+
+  // delay(1000);
+  // digitalWrite(pinLed, LOW);//turn led off
+
+  // digitalWrite(pinLed, digitalRead(rx_pin));
+}
