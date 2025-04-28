@@ -9,7 +9,7 @@ class Logger {
 
         static Logger * instance;
 
-        static Logger *getInstance();
+        static Logger * getInstance();
 
         void println(String data);
         void print(String data);
