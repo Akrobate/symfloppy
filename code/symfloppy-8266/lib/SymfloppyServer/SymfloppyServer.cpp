@@ -41,9 +41,9 @@ void SymfloppyServer::init() {
   this->server->on(
     "/channel",
     HTTP_POST,
-    [&](AsyncWebServerRequest *request){
+    [&](AsyncWebServerRequest * request) {
       for (int i = 0; i < request->params(); i++) {
-        AsyncWebParameter* p = request->getParam(i);
+        const AsyncWebParameter * p = request->getParam(i);
         Serial.printf("POST[%s]: %s\n", p->name().c_str(), p->value().c_str());
         if (p->name() == "channel") {
           this->channel = p->value().toInt();
@@ -60,7 +60,7 @@ void SymfloppyServer::init() {
     [&](AsyncWebServerRequest *request){
       String result = "OK";
       for (int i = 0; i < request->params(); i++) {
-        AsyncWebParameter* p = request->getParam(i);
+        const AsyncWebParameter* p = request->getParam(i);
         Serial.printf("POST[%s]: %s\n", p->name().c_str(), p->value().c_str());
         
         if (p->name() == "filename") {

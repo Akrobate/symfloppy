@@ -3,12 +3,9 @@
 #include <ESPAsyncTCP.h>
 #include <Player.h>
 #include <FrequencyGenerator.h>
-#include <MIDI.h>
+#include <secrets.h>
 
 #include <SymfloppyServer.h>
-
-
-MIDI_CREATE_DEFAULT_INSTANCE();
 
 #define SERVER_PORT           80
 #define DEFAULT_MIDI_CHANNEL  14
@@ -33,33 +30,8 @@ void setup() {
 
   digitalWrite(pinLed, LOW);
   
-  // Serial.begin(31250);
-  // Serial.swap();
-  // MIDI.begin(MIDI_CHANNEL_OMNI);
-
-
   Serial.begin(115200);
   
-
-  // MIDI.turnThruOff();
-
-
-
-/*
-  MIDI.setHandleNoteOn([](byte channel, byte pitch, byte velocity) {
-    if (velocity > 0) {
-      digitalWrite(pinLed, HIGH);
-    } else {
-      digitalWrite(pinLed, LOW);  
-    }
-  });
-
-  MIDI.setHandleNoteOff([](byte channel, byte pitch, byte velocity) {
-    digitalWrite(pinLed, LOW);
-  });
-*/
-
-
   const String mac_address = WiFi.macAddress();
   String mac_serial = WiFi.macAddress();
   String mac_serial_truncated;
@@ -71,7 +43,7 @@ void setup() {
   WiFi.softAP(ssid);
 
   // Debug wifi connection as STA
-  WiFi.begin("LiveboxLA", "Kzen=813;");
+  WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
   int wifi_max_try = 5;
 
   Serial.print("Connecting");
@@ -86,19 +58,14 @@ void setup() {
   Serial.println();
   Serial.print("Connected, IP address: ");
   Serial.println(WiFi.localIP());
-  // Endd Debug wifi connection as STA
-
 
   server->init();
   server->begin();
-
-
 
   // Serial.println("Loading file");
 
   player->setFileName("/Undertale_-_Megalovania.mid");
   // player->setFileName("/I_Was_Made_for_Loving_You.mid");
-
 
   player->setChannel(1);
   player->load();
@@ -122,5 +89,4 @@ void setup() {
 void loop() {
   player->update();
   frequency_generator->update();
-  // MIDI.read();
 }
