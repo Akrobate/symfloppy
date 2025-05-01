@@ -71,17 +71,23 @@ void setup() {
   player->load();
 
   player->onNoteEvent([](Note * note) {
+    /*
     if (note->isNoteOn()) {
       frequency_generator->setFrequency(note->getFrequency());
       frequency_generator->start();
     } else {
       frequency_generator->stop();
     }
+      */
   });
+
+
+  frequency_generator->setFrequency(440);
+  frequency_generator->start();
 
   // Uncomment to make it play the file
   player->play();
-  // WiFi.mode(WIFI_OFF);
+  WiFi.mode(WIFI_OFF);
 
 }
 
