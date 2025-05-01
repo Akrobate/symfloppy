@@ -71,7 +71,7 @@ void setup() {
   WiFi.softAP(ssid);
 
   // Debug wifi connection as STA
-  WiFi.begin("LiveboxLA", "Kzen=813;");
+  WiFi.begin("ssid_value", "password_value");
   int wifi_max_try = 5;
 
   Serial.print("Connecting");
