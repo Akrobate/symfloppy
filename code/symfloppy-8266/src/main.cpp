@@ -21,12 +21,11 @@ FrequencyGenerator * frequency_generator = new FrequencyGenerator(PIN_BUZZER);
 Player * player = new Player();
 SymfloppyServer * server = new SymfloppyServer(SERVER_PORT);
 
+
 void setup() {
 
 
   pinMode(pinLed, OUTPUT);
-
-  analogWriteFreq(500);
 
   digitalWrite(pinLed, LOW);
   
@@ -64,29 +63,43 @@ void setup() {
 
   // Serial.println("Loading file");
 
-  player->setFileName("/Undertale_-_Megalovania.mid");
+  // player->setFileName("/Undertale_-_Megalovania.mid");
   // player->setFileName("/I_Was_Made_for_Loving_You.mid");
+  player->setFileName("/gamme_2.mid");
+
 
   player->setChannel(1);
   player->load();
 
   player->onNoteEvent([](Note * note) {
-    /*
     if (note->isNoteOn()) {
       frequency_generator->setFrequency(note->getFrequency());
       frequency_generator->start();
     } else {
       frequency_generator->stop();
     }
-      */
   });
 
 
-  frequency_generator->setFrequency(440);
-  frequency_generator->start();
+  player->onStopPlayingEvent([]() {
+    frequency_generator->stop();
+    WiFi.mode(WIFI_STA);
+    WiFi.begin();
+    Serial.print("Connecting");
+  
+    int count_try = 0;
+    while (WiFi.status() != WL_CONNECTED) {
+      delay(200);
+      Serial.print(".");
+      count_try++;
+    }
+  
+    Serial.println("Playing finished, restarting wifi connection");
+  });
 
   // Uncomment to make it play the file
   player->play();
+  WiFi.disconnect(true, false); 
   WiFi.mode(WIFI_OFF);
 
 }

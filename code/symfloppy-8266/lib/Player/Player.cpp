@@ -62,15 +62,18 @@ void Player::findNextNote() {
             chunk_t chunkType = this->midi_file.openChunk();
             if (chunkType != CT_MTRK) {
                 if (chunkType == CT_END) {
-                    this->closeFile();
+                    // this->closeFile();
                     this->is_finished = true;
                     this->is_playing = false;
+                    this->stop();
                     continue;
                 }
-                this->closeFile();    
+                // this->closeFile();    
                 this->error_occurred = true;
+                this->stop();
                 continue;
             }
+
             continue;
         }
 
@@ -121,7 +124,9 @@ void Player::update() {
     if (this->is_playing && !this->is_finished && !this->error_occurred) {
         if (millis() - time_millis > this->note->getEventDeltaMillis()) {
             time_millis = millis();
-            this->on_note_function(this->note);
+            if (this->on_note_function) {
+                this->on_note_function(this->note);
+            }
             this->findNextNote();
         }
     }
@@ -133,8 +138,24 @@ void Player::onNoteEvent(NoteEventFunction on_note_function) {
 }
 
 
+void Player::onStopPlayingEvent(StopPlayingEventFunction on_stop_playing_function) {
+    this->on_stop_playing_function = on_stop_playing_function;
+}
+
+
 void Player::play() {
     this->is_playing = true;
+    this->is_finished = false;
+    this->error_occurred = false;
+}
+
+
+void Player::stop() {
+    this->is_playing = false;
+    this->closeFile();
+    if (this->on_stop_playing_function) {
+        this->on_stop_playing_function();
+    }
 }
 
 
