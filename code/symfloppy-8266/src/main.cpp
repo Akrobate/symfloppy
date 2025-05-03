@@ -1,30 +1,26 @@
 #include <Arduino.h>
 #include <ESP8266WiFi.h>
 #include <ESPAsyncTCP.h>
-#include <Player.h>
+#include <FastLED.h>
+
 #include <FrequencyGenerator.h>
+#include <SymfloppyServer.h>
+#include <Player.h>
+#include <ButtonsInterface.h>
+
+#include <configurations.h>
 #include <secrets.h>
 
-#include <FastLED.h>
-#include <SymfloppyServer.h>
-
-#define SERVER_PORT           80
-#define DEFAULT_MIDI_CHANNEL  14
 
 const String ssid = "ESP8266_SSID_1";
 
 int channel = DEFAULT_MIDI_CHANNEL;
 
-const byte PIN_BUZZER = 5;    // GPIO 5   // D1
-const byte PIN_NEOPIXEL_LED = 15;  // GPIO 15  // D8
-const byte PIN_BUTTON_LEFT = 4;    // GPIO 4   // D2
-const byte PIN_BUTTON_RIGHT = 13;   // GPIO 13  // D7
-const byte PIN_BUTTON_MIDDLE = 12;  // GPIO 12  // D6
-
-
 FrequencyGenerator * frequency_generator = new FrequencyGenerator(PIN_BUZZER);
 Player * player = new Player();
 SymfloppyServer * server = new SymfloppyServer(SERVER_PORT);
+ButtonsInterface * buttons_interface = new ButtonsInterface();
+
 
 CRGB leds[3];
 
@@ -121,4 +117,19 @@ void setup() {
 void loop() {
   player->update();
   frequency_generator->update();
+  buttons_interface->update();
+  if (buttons_interface->onLeft()) {
+    leds[1] = CRGB::Red;
+    FastLED.delay(1);
+    FastLED.show();
+  }
+
+  if (buttons_interface->onRight()) {
+    leds[1] = CRGB::Black;
+    FastLED.delay(1);
+    FastLED.show();
+  }
+
 }
+
+
