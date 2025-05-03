@@ -1,5 +1,4 @@
-#ifndef ButtonsInterface_h
-#define ButtonsInterface_h
+#pragma once
 
 #include <Arduino.h>
 #include <Toggle.h>
@@ -29,5 +28,3 @@ class ButtonsInterface {
         bool onMiddle();
 
 };
-
-#endif
