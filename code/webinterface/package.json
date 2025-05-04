@@ -5,7 +5,6 @@
   "main": "stub-server.js",
   "scripts": {
     "start": "nodemon stub-server-express.js",
-    "v1": "nodemon stub-server.js",
     "minify": "minify index.html > index.min.html"
   },
   "author": "",

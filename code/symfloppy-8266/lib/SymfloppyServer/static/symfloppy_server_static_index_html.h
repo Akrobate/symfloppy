@@ -1,3 +1,6 @@
+#include <Arduino.h>
+
+const char symfloppy_server_static_index_html[] PROGMEM = R"rawliteral(
 <html>
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -64,3 +67,5 @@
         </p>
     </body>
 </html>
+)rawliteral";
+

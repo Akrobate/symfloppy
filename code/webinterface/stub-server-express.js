@@ -14,9 +14,11 @@ const upload = multer({
     })
 });
 
-const port = 8080;
+const port = 8087;
 // const webinterface_html_file = 'index.min.html';
 const webinterface_html_file = 'index.html';
+const webinterface_css_file = 'style.css';
+const webinterface_index_js_file = 'index.js';
 
 const app = express();
 app.use(bodyParser.json());
@@ -26,7 +28,15 @@ app.use(bodyParser.urlencoded({ extended: true }));
 let channel = 13;
 
 app.get('/', (request, response) => {
-    response.sendFile(webinterface_html_file, {root: __dirname })
+    response.sendFile(webinterface_html_file, { root: __dirname })
+});
+
+app.get('/style.css', (request, response) => {
+    response.sendFile(webinterface_css_file, { root: __dirname })
+});
+
+app.get('/index.js', (request, response) => {
+    response.sendFile(webinterface_index_js_file, { root: __dirname })
 });
 
 app.get('/channel', (request, response) => {

@@ -19,15 +19,29 @@ void SymfloppyServer::init() {
     }
   );
 
-
   this->server->on(
     "/",
     HTTP_GET,
     [](AsyncWebServerRequest *request){
-      request->send_P(200, "text/html", index_html);
+        request->send_P(200, "text/html; charset=UTF-8", symfloppy_server_static_index_html);
     }
   );
 
+  this->server->on(
+      "/style.css",
+      HTTP_GET,
+      [](AsyncWebServerRequest *request){
+          request->send_P(200, "text/css; charset=UTF-8", symfloppy_server_static_style_css);
+      }
+  );
+
+  this->server->on(
+      "/index.js",
+      HTTP_GET,
+      [](AsyncWebServerRequest *request){
+          request->send_P(200, "application/javascript; charset=UTF-8", symfloppy_server_static_index_js);
+      }
+  );
 
   this->server->on(
     "/channel",
@@ -74,7 +88,7 @@ void SymfloppyServer::init() {
   );
 
 
-
+  // @todo: refactor to use MidiFileManager
   this->server->on(
     "/files",
     HTTP_GET,
