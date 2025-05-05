@@ -11,6 +11,11 @@ void SymfloppyServer::begin() {
 }
 
 
+void SymfloppyServer::injectMidiFileManager(MidiFileManager * midi_file_manager) {
+    this->midi_file_manager = midi_file_manager;
+}
+
+
 void SymfloppyServer::init() {
 
   this->server->onNotFound(
@@ -88,28 +93,22 @@ void SymfloppyServer::init() {
   );
 
 
-  // @todo: refactor to use MidiFileManager
   this->server->on(
     "/files",
     HTTP_GET,
-    [](AsyncWebServerRequest *request){
-      Serial.println("GET /files ");
+    [&](AsyncWebServerRequest *request){
+      Serial.println("GET /files-new ");
       AsyncResponseStream *response = request->beginResponseStream("application/json");
       DynamicJsonDocument json(1024);
       JsonArray file_list = json.createNestedArray("file_list");
-
-      Dir dir = LittleFS.openDir("/");
-      while (dir.next()) {
-        JsonObject file_object = file_list.createNestedObject();
-        file_object["filename"] = dir.fileName();
-        file_object["size"] = 0;
-        if(dir.fileSize()) {
-            File f = dir.openFile("r");
-            file_object["size"] = f.size();
-            f.close();
+      for (int i = 0; i < this->midi_file_manager->getFileCount(); i++) {
+        const MidiFileManager::MidiFile* file = this->midi_file_manager->getFileAt(i);
+        if (file) {
+          JsonObject file_object = file_list.createNestedObject();
+          file_object["filename"] = file->name;
+          file_object["size"] = file->size;
         }
       }
-
       serializeJson(json, *response);
       request->send(response);
     }

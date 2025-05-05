@@ -40,16 +40,11 @@ void setup() {
       }
     }
 
+    server->injectMidiFileManager(midi_file_manager);
     server->init();
     server->begin();
 
-    // Serial.println("Loading file");
-    // player->setFileName("/Undertale_-_Megalovania.mid");
-    // player->setFileName("/I_Was_Made_for_Loving_You.mid");
-    // player->setFileName("/gamme_2.mid");
-
     player->setChannel(1);
-    player->load();
 
     player->onNoteEvent([](Note * note) {
         if (note->isNoteOn()) {
@@ -65,7 +60,7 @@ void setup() {
     player->onStopPlayingEvent([]() {
         frequency_generator->stop();
         // wifi_manager->reconnect();
-        Serial.println("Playing finished, restarting wifi connection");
+        // Serial.println("Playing finished, restarting wifi connection");
     });
 
     // player->play();
