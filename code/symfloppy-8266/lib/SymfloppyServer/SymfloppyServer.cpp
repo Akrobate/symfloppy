@@ -57,17 +57,20 @@ void SymfloppyServer::init() {
 		}
 	);
 
+	
 	this->server->on(
 		"/channel",
 		HTTP_POST,
 		[&](AsyncWebServerRequest * request) {
-			for (int i = 0; i < request->params(); i++) {
-				const AsyncWebParameter * p = request->getParam(i);
-				Serial.printf("POST[%s]: %s\n", p->name().c_str(), p->value().c_str());
-				if (p->name() == "channel") {
-					this->channel = p->value().toInt();
-				}
+			int value = 0;
+			if (request->hasParam("channel", true)) {
+				value = request->getParam("channel", true)->value().toInt();
+			} else {
+			  request->send(HTTP_CODE_BAD_REQUEST, "text/html", "Missing value");
+			  return;
 			}
+
+			this->channel = value;
 			request->send(200, "text/html", "OK");
 		}
 	);
@@ -75,6 +78,27 @@ void SymfloppyServer::init() {
 
 	this->server->on(
 		"/files",
+		HTTP_DELETE,
+		[&](AsyncWebServerRequest *request) {
+			String result = "OK";
+			if (request->hasParam("filename", true)) {
+				String filename = request->getParam("filename", true)->value();
+				if (!LittleFS.remove(filename)) {
+					result = "NOK";
+				}
+			} else {
+			  request->send(HTTP_CODE_BAD_REQUEST, "text/html", "Missing value");
+			  return;
+			}
+
+			request->send_P(200, "text/html", result.c_str());
+		}
+	);
+
+
+	// @todo: remove this old route when tested
+	this->server->on(
+		"/files-old",
 		HTTP_DELETE,
 		[&](AsyncWebServerRequest *request) {
 			String result = "OK";

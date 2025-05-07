@@ -24,6 +24,12 @@ class SymfloppyServer {
     public:
         int channel;
 
+        static constexpr int HTTP_CODE_OK = 200;
+        static constexpr int HTTP_CODE_CREATED = 201;
+        static constexpr int HTTP_CODE_BAD_REQUEST = 400;
+        static constexpr int HTTP_CODE_NOT_FOUND = 404;
+        static constexpr int HTTP_CODE_ERROR = 500;
+
         SymfloppyServer(int port);
         void init();
         void begin();
