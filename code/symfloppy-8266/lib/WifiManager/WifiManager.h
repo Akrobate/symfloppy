@@ -10,6 +10,11 @@ class WifiManager {
 
     private:
         String mac_serial_truncated = "";
+        bool is_connected = false;
+        bool is_ap_started = false;
+        bool is_connecting = false;
+
+        unsigned long millis_duration_since_last_connected = 0;
 
     public:
         WifiManager();
