@@ -90,28 +90,7 @@ void SymfloppyServer::init() {
 			  request->send(HTTP_CODE_BAD_REQUEST, "text/html", "Missing value");
 			  return;
 			}
-
-			request->send_P(200, "text/html", result.c_str());
-		}
-	);
-
-
-	// @todo: remove this old route when tested
-	this->server->on(
-		"/files-old",
-		HTTP_DELETE,
-		[&](AsyncWebServerRequest *request) {
-			String result = "OK";
-			for (int i = 0; i < request->params(); i++) {
-				const AsyncWebParameter* p = request->getParam(i);
-				Serial.printf("POST[%s]: %s\n", p->name().c_str(), p->value().c_str());
-				if (p->name() == "filename") {
-					if (!LittleFS.remove(p->value().c_str())) {
-						result = "NOK";
-					}
-				}
-			}
-			request->send_P(200, "text/html", result.c_str());
+			request->send(HTTP_CODE_OK, "text/html", result);
 		}
 	);
 
