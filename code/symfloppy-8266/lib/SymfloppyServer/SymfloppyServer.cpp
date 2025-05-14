@@ -90,6 +90,7 @@ void SymfloppyServer::init() {
 			  request->send(HTTP_CODE_BAD_REQUEST, "text/html", "Missing value");
 			  return;
 			}
+			this->midi_file_manager->reload();
 			request->send(HTTP_CODE_OK, "text/html", result);
 		}
 	);
@@ -143,7 +144,7 @@ void SymfloppyServer::init() {
 			Serial.println("In upload route");
 			request->send(200, "text/html", "FILE UPLOADED");
 		},
-		[](AsyncWebServerRequest *request, String filename, size_t index, uint8_t *data, size_t len, bool final) {
+		[&](AsyncWebServerRequest *request, String filename, size_t index, uint8_t *data, size_t len, bool final) {
 
 			Serial.println("in handleUpload");
 			String logmessage = "Client:" + request->client()->remoteIP().toString() + " " + request->url();
@@ -164,6 +165,7 @@ void SymfloppyServer::init() {
 			if (final) {
 				logmessage = "Upload Complete: " + String(filename) + ",size: " + String(index + len);
 				request->_tempFile.close();
+				this->midi_file_manager->reload();
 				Serial.println(logmessage);
 			}
 		}

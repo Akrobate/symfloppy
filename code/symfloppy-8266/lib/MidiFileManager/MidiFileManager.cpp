@@ -12,7 +12,8 @@ void MidiFileManager::init() {
     Serial.println("File system mounted successfully");
 }
 
-void MidiFileManager::loadFiles(const String& directory) {
+void MidiFileManager::loadFiles(String directory) {
+    this->directory = directory;
     fileCount = 0;
     Dir dir = LittleFS.openDir(directory);
   
@@ -25,6 +26,12 @@ void MidiFileManager::loadFiles(const String& directory) {
       }
     }
 }
+
+
+void MidiFileManager::reload() {
+    this->loadFiles(this->directory);
+}
+
 
 int MidiFileManager::getFileCount() {
     return fileCount;
