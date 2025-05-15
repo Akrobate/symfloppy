@@ -80,10 +80,16 @@ void playFile(int file_index) {
         player->setFileName(file->name);
         player->load();
         player->play();
-        Serial.printf("Playing file: %s\n", file->name.c_str());
+        is_playing = true;
+        Serial.println("Playing file: " + file->name);
     } else {
         Serial.println("Invalid file index");
     }
+}
+
+void stop() {
+    player->stop();
+    is_playing = false;
 }
 
 void playNextFile() {
@@ -122,12 +128,10 @@ void loop() {
 
     if (buttons_interface->onMiddle()) {
         if (is_playing) {
-            player->stop();
-            is_playing = false;
+            stop();
             led_interface->off();
         } else {
             playFile(playing_file_index);
-            is_playing = true;
             led_interface->onGreen();
         }
     }
