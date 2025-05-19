@@ -26,9 +26,7 @@
             </div>
 
             <div class="content">
-                <div class="item"><span>❌</span> <span>Fichier 1.mid</span></div>
-                <div class="item"><span>❌</span> <span>Fichier 2.mid</span></div>
-                <div class="item"><span>❌</span> <span>Fichier 3.mid</span></div>
+                <ul class="list" id="song-list">
             </div>
 
             <div class="content">
@@ -48,5 +46,19 @@
         <p class="block-position" style="text-align: right;" id="corporate_mention">
             Software version: v1.0
         </p>
+
+
+        <template id="template-song-item">
+            <li class="list-item" data-index="{{ data_index }}">
+                <div class="content">
+                    <div class="title">{{ name }}</div>
+                </div>
+                <div class="actions">
+                    <button class="" onclick="removeSong(this)" data-song-name="{{ name }}">
+                        ❌
+                    </button>
+                </div>
+            </li>
+        </template>
     </body>
 </html>
