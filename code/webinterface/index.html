@@ -37,7 +37,7 @@
             </div>
 
             <div class="content center">
-                <button type="button" id="button_upload">
+                <button type="button" id="button_upload" class="upload">
                     Upload
                 </button>
             </div>
@@ -48,17 +48,21 @@
         </p>
 
 
-        <template id="template-song-item">
+        <template id="template-song-list-item">
             <li class="list-item" data-index="{{ data_index }}">
                 <div class="content">
-                    <div class="title">{{ name }}</div>
+                    <div class="title">{{ filename }}</div>
                 </div>
                 <div class="actions">
-                    <button class="" onclick="removeSong(this)" data-song-name="{{ name }}">
+                    <span class="" onclick="removeSong(this)" data-song-name="{{ filename }}">
                         ❌
-                    </button>
+                    </span>
                 </div>
             </li>
+        </template>
+
+        <template id="template-list-loader">
+            <div class="loader center mt-lg mb-lg"></div>
         </template>
     </body>
 </html>

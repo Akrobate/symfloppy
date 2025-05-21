@@ -1,18 +1,21 @@
+function $(selector, element = document) {
+    return element.querySelector(selector)
+}
 
 
 // INIT
 document.addEventListener('DOMContentLoaded', async () => {
 
     const button_channel_save = document.getElementById('button_channel_save')
-    const select_channel_save = document.getElementById('select_channel_save')
 
     const input_file = document.getElementById('input_file')
     const button_upload = document.getElementById('button_upload')
-    const span_upload_help = document.getElementById('span_upload_help');
-    const span_channel_help = document.getElementById('span_channel_help');
+    const span_upload_help = document.getElementById('span_upload_help')
+    const span_channel_help = document.getElementById('span_channel_help')
 
-    const corporate_mention = document.getElementById('corporate_mention');
+    const corporate_mention = document.getElementById('corporate_mention')
 
+    await loadSongsList();
 
     function message(el, txt, add_class='') {
         el.classList.remove('valid')
@@ -21,35 +24,6 @@ document.addEventListener('DOMContentLoaded', async () => {
             el.classList.add(add_class)
         el.innerText = txt
     }
-
-    for(let i = 1; i < 17; i++) {
-        const option = document.createElement('option');
-        option.innerText = 'channel ' + i
-        option.value = i
-        select_channel_save.appendChild(option)
-    }
-
-    fetch('/channel')
-        .then((response) => response.json())
-        .then((value) => select_channel_save.value = value);
-
-
-    button_channel_save.addEventListener('click', async () => {
-        const data = select_channel_save.value
-        try {
-            let formData = new FormData()
-            formData.append('channel', data)
-            await fetch('/channel',
-                {
-                    body: formData,
-                    method: 'POST',
-                }
-            )
-            message(span_channel_help, 'Channel saved', 'valid')
-        } catch (error) {
-            message(span_channel_help, 'Error occured', 'error')
-        }
-    })
 
 
     button_upload.addEventListener('click', async () => {
@@ -84,5 +58,52 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     })
 
-
 })
+
+async function serverGetSongList() {
+    try {
+        const result = await fetch('/files',
+            {
+                method: 'GET',
+            }
+        )
+        const data = await result.json()
+        return data.file_list
+    } catch (error) {
+        console.log('serverGetSongList - Error:', error)
+        return []
+    }
+}
+
+async function loadSongsList() {
+    const _el = $('#song-list')
+    await loadList(
+        _el,
+        $('#template-song-list-item'),
+        $('#template-list-loader'),
+        () => serverGetSongList()
+    )
+}
+
+
+async function loadList(
+    _list_el,
+    list_item_el,
+    template_el,
+    data_function
+) {
+    _list_el.innerHTML = template_el.innerHTML
+    const data_list = await data_function()
+    _list_el.innerHTML = ''
+    const template_html = list_item_el.innerHTML
+    data_list.forEach((data, index) => {
+        let html = template_html
+        Object.keys(data).forEach((key) => {
+            html = html.replaceAll(`{{ ${key} }}`, data[key]);
+        })
+        html = html.replaceAll('{{ index }}', index);
+        const _new_el = document.createElement("div")
+        _new_el.innerHTML = html
+        _list_el.appendChild(_new_el.firstElementChild)
+    })
+}

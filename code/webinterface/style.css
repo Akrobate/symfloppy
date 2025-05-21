@@ -28,7 +28,7 @@ span {
 .error {
     color: red;
 }
-button {
+button.upload {
     width: 140px;
     height: 30px;
     border: 1px solid grey;
@@ -36,4 +36,42 @@ button {
 }
 .center {
     text-align: center;
+}
+
+.loader {
+    border: 10px solid #c5c2c2;
+    border-top: 10px solid #3498db;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+}
+
+.loader-small {
+    border: 1px solid #c5c2c2;
+    border-top: 1px solid #3498db;
+    border-radius: 50%;
+    width: 10px;
+    height: 10px;
+    animation: spin 1s linear infinite;
+}
+
+
+ul.list {
+    list-style: none;
+}
+
+ul.list li.list-item {
+    display: flex;
+    justify-content: space-between;
+}
+
+ul.list .title {
+    font-weight: bold;
+}
+
+ul.list .actions {   
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;    
 }
