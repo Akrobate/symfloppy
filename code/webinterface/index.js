@@ -99,11 +99,16 @@ async function loadList(
     data_list.forEach((data, index) => {
         let html = template_html
         Object.keys(data).forEach((key) => {
-            html = html.replaceAll(`{{ ${key} }}`, data[key]);
+            html = html.replaceAll(`{{ ${key} }}`, data[key])
         })
-        html = html.replaceAll('{{ index }}', index);
+        html = html.replaceAll('{{ index }}', index)
         const _new_el = document.createElement("div")
         _new_el.innerHTML = html
         _list_el.appendChild(_new_el.firstElementChild)
     })
+}
+
+
+async function removeSong(element) {
+    console.log('removeSong', element)
 }
