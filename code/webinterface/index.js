@@ -17,48 +17,51 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     await loadSongsList();
 
-    function message(el, txt, add_class='') {
-        el.classList.remove('valid')
-        el.classList.remove('error')
-        if (add_class)
-            el.classList.add(add_class)
-        el.innerText = txt
-    }
-
-
-    button_upload.addEventListener('click', async () => {
-        const file = input_file.files[0]
-        if (file === undefined) {
-            message(span_upload_help, 'Please select file first', 'error')
-            return
-        }
-        if (file.size > 100000) {
-            message(span_upload_help, `File size is too large (${Math.ceil(file.size / 1000)}kb), max file size is 100kb`, 'error')
-            return
-        }
-        message(span_upload_help, 'Uploading...')
-
-        const form_data = new FormData()
-        form_data.append('file', input_file.files[0])
-
-        console.log(form_data)
-        try {
-            await fetch('/upload', {
-                method: 'POST',
-                body: form_data,
-                //headers: {
-                //    "Content-Type": "multipart/form-data"
-                //}
-            })
-        } catch (error) {
-            message(span_upload_help, 'Error occured', 'error')
-        }
-        
-        message(span_upload_help, 'File uploaded', 'valid')
-
-    })
 
 })
+
+
+function message(el, txt, add_class='') {
+    el.classList.remove('valid')
+    el.classList.remove('error')
+    if (add_class)
+        el.classList.add(add_class)
+    el.innerText = txt
+}
+
+
+async function uploadFile() {
+    const file = input_file.files[0]
+    if (file === undefined) {
+        message(span_upload_help, 'Please select file first', 'error')
+        return
+    }
+    if (file.size > 100000) {
+        message(span_upload_help, `File size is too large (${Math.ceil(file.size / 1000)}kb), max file size is 100kb`, 'error')
+        return
+    }
+    message(span_upload_help, 'Uploading...')
+
+    const form_data = new FormData()
+    form_data.append('file', input_file.files[0])
+
+    console.log(form_data)
+    try {
+        await fetch('/upload', {
+            method: 'POST',
+            body: form_data,
+            //headers: {
+            //    "Content-Type": "multipart/form-data"
+            //}
+        })
+    } catch (error) {
+        message(span_upload_help, 'Error occured', 'error')
+    }
+    
+    message(span_upload_help, 'File uploaded', 'valid')
+
+}
+
 
 async function serverGetSongList() {
     try {
