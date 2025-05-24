@@ -59,11 +59,14 @@ button.upload {
 
 ul.list {
     list-style: none;
+    padding-left: 0;
 }
 
 ul.list li.list-item {
     display: flex;
     justify-content: space-between;
+    margin-top: 7px;
+    margin-bottom: 7px;
 }
 
 ul.list .title {
