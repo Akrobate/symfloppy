@@ -33,6 +33,7 @@ void FrequencyGenerator::start() {
 
 void FrequencyGenerator::stop() {
     this->running = false;
+    digitalWrite(this->pin, LOW);
 }
 
 void FrequencyGenerator::update() {
