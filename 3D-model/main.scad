@@ -6,7 +6,7 @@ use <./assets/esp-module-holder-3d-model/components/holder-8266-D1-component.sca
 
 include <./configuration.scad>
 
-SHOW_FLOPPY_DRIVE = 1;
+SHOW_FLOPPY_DRIVE = true;
 SHOW_BUTTON_ASSETS = true;
 SHOW_HOLDER_PIECE = true;
 SHOW_8266_FIXATION = true;
