@@ -1,5 +1,5 @@
 use <./subpieces/centeredPaneSubPiece.scad>
-include <../configuration.scad>
+include <../configurations/global.scad>
 
 leftPanePiece();
 

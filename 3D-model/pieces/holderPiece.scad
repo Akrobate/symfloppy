@@ -1,4 +1,4 @@
-include <../configuration.scad> 
+include <../configurations/global.scad> 
 
 // insert sizes
 // * diam = 4.6

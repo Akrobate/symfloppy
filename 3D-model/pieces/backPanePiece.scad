@@ -2,7 +2,7 @@ use <./subpieces/centeredPaneSubPiece.scad>
 use <../envelopes/din5.scad>
 use <../assets/esp-module-holder-3d-model/pieces/throws-holder-external-fix.scad>
 
-include <../configuration.scad>
+include <../configurations/global.scad>
 
 backPanePiece();
 

@@ -3,7 +3,7 @@ use <../envelopes/floppyFixationThrows.scad>
 use <../envelopes/buttonAssetThrow.scad>
 use <../envelopes/holdersPiecesThrows.scad>
 
-include <../configuration.scad>
+include <../configurations/global.scad>
 
 
 topPanePiece();

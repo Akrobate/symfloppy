@@ -1,4 +1,4 @@
-include <../configuration.scad>
+include <../configurations/global.scad>
 holdersPiecesThrows();
 
 module holdersPiecesThrows(

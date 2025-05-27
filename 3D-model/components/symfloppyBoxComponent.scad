@@ -6,7 +6,7 @@ use <../pieces/frontPanePiece.scad>
 use <../pieces/leftPanePiece.scad>
 use <../pieces/rightPanePiece.scad>
 
-include <../configuration.scad>
+include <../configurations/global.scad>
 
 
 module symfloppyBoxComponent(

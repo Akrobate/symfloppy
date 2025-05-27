@@ -1,7 +1,7 @@
 use <./subpieces/centeredPaneSubPiece.scad>
 use <../envelopes/holdersPiecesThrows.scad>
 
-include <../configuration.scad>
+include <../configurations/global.scad>
 
 bottomPanePiece();
 
