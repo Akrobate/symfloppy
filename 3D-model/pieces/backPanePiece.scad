@@ -4,9 +4,13 @@ use <../assets/esp-module-holder-3d-model/pieces/throws-holder-external-fix.scad
 
 include <../configurations/global.scad>
 
-backPanePiece();
-
-
+/**
+ * backPanePiece
+ * @name backPanePiece
+ * @description backPanePiece
+ * @type piece
+ * @parent
+ */
 module backPanePiece(
     x_size = symfloppy_box_x_size,
     y_size = symfloppy_box_z_size - symfloppy_box_pane_thickness * 2,
@@ -57,3 +61,6 @@ module backPanePiece(
             );   
     }
 }
+
+
+backPanePiece();

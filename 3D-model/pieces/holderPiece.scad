@@ -5,10 +5,6 @@ include <../configurations/global.scad>
 // * length = 5.7
 
 
-holderPiece();
-
-
-
 module holderPiece(
     z_size = symfloppy_box_z_size - (symfloppy_box_pane_thickness * 2),
     y_size = 14,
@@ -98,6 +94,9 @@ module insertThrow(
 ) {
     cylinder(d = insert_throw_diameter, h = insert_throw_length + throw_offset, center = true, $fn = _fn);
 }
+
+
+holderPiece();
 
 
 

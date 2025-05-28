@@ -3,8 +3,14 @@ use <../envelopes/holdersPiecesThrows.scad>
 
 include <../configurations/global.scad>
 
-bottomPanePiece();
 
+/**
+ * bottomPanePiece
+ * @name bottomPanePiece
+ * @description bottomPanePiece
+ * @type piece
+ * @parent
+ */
 module bottomPanePiece(
     x_size = symfloppy_box_x_size,
     y_size = symfloppy_box_y_size,
@@ -25,3 +31,5 @@ module bottomPanePiece(
         );
     }
 }
+
+bottomPanePiece();
