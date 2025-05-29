@@ -1,9 +1,14 @@
 use <./subpieces/centeredPaneSubPiece.scad>
 include <../configurations/global.scad>
 
-leftPanePiece();
 
-
+/**
+ * leftPanePiece
+ * @name leftPanePiece
+ * @description leftPanePiece
+ * @type piece
+ * @parent
+ */
 module leftPanePiece(
     x_size = symfloppy_box_y_size - (symfloppy_box_pane_thickness * 2),
     y_size = symfloppy_box_z_size - (symfloppy_box_pane_thickness * 2),
@@ -33,3 +38,5 @@ module leftPanePiece(
             cylinder(d=throws_diameter, h=pane_thickness * 2, center=true, $fn=_fn);
     }
 }
+
+leftPanePiece();
