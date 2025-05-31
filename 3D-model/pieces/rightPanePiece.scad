@@ -1,8 +1,13 @@
 use <./subpieces/centeredPaneSubPiece.scad>
 include <../configurations/global.scad>
 
-rightPanePiece();
-
+/**
+ * rightPanePiece
+ * @name rightPanePiece
+ * @description rightPanePiece
+ * @type piece
+ * @parent
+ */
 module rightPanePiece(
     x_size = symfloppy_box_y_size - (symfloppy_box_pane_thickness * 2),
     y_size = symfloppy_box_z_size - (symfloppy_box_pane_thickness * 2),
@@ -31,3 +36,5 @@ module rightPanePiece(
             cylinder(d=throws_diameter, h=pane_thickness * 2, center=true, $fn=_fn);
     }
 }
+
+rightPanePiece();

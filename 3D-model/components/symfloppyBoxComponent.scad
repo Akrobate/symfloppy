@@ -9,6 +9,13 @@ use <../pieces/rightPanePiece.scad>
 include <../configurations/global.scad>
 
 
+/**
+ * symfloppyBoxComponent
+ * @name symfloppyBoxComponent
+ * @description symfloppyBoxComponent
+ * @type component
+ * @parent
+ */
 module symfloppyBoxComponent(
     x_size = symfloppy_box_x_size,
     y_size = symfloppy_box_y_size,

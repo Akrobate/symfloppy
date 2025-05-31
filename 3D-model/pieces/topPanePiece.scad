@@ -5,10 +5,13 @@ use <../envelopes/holdersPiecesThrows.scad>
 
 include <../configurations/global.scad>
 
-
-topPanePiece();
-
-
+/**
+ * topPanePiece
+ * @name topPanePiece
+ * @description topPanePiece
+ * @type piece
+ * @parent
+ */
 module topPanePiece(
     x_size = symfloppy_box_x_size,
     y_size = symfloppy_box_y_size,
@@ -53,5 +56,7 @@ module topPanePiece(
             throws_diameter = 3.5
         );        
     }
-
 }
+
+
+topPanePiece();
