@@ -1,21 +1,25 @@
-#ifndef Logger_h
-#define Logger_h
+#pragma once
 
 #include <Arduino.h>
 
+#define logger Logger::getInstance()
+#define LOG(msg) Logger::getInstance().println(msg)
+#define LOG_PRINT(msg) Logger::getInstance().print(msg)
+
+
 class Logger {
-    
-    public:
-
-        static Logger * instance;
-
-        static Logger * getInstance();
-
-        void println(String data);
-        void print(String data);
 
     private:
         Logger();
-};
+        bool enable_serial_print = true;
 
-#endif
+        void telnetPrint(String message);
+        void serialPrint(String message);
+        void serialPrintln(String message);
+        
+    public:
+        void println(String message);
+        void print(String message);
+        static Logger& getInstance();
+
+};
