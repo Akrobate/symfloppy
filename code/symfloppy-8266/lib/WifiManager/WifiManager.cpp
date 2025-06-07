@@ -51,3 +51,27 @@ void WifiManager::waitForConnection() {
         Serial.print(".");
     }
 }
+
+
+bool WifiManager::saveWifiCredentials(const String& ssid, const String& password) {
+    // generate json document
+    DynamicJsonDocument doc(512);
+    doc["ssid"] = ssid;
+    doc["password"] = password;
+
+    // save to LittleFS
+    File file = LittleFS.open("/credentials.json", "w");
+    if (!file) {
+        Serial.println("Failed to open file for writing");
+        return false;
+    }
+
+    if (serializeJson(doc, file) == 0) {
+        Serial.println("Failed to write JSON to file");
+        file.close();
+        return false;
+    }
+    return true;
+}
+
+

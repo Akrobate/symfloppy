@@ -21,6 +21,8 @@ class WifiManager {
         void init();
         void generateMacSerialTruncated();
 
+        bool saveCredentials(const String& ssid, const String& password);
+
         void startAccessPoint();
         void connect();
         void waitForConnection();
