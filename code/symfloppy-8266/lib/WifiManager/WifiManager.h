@@ -2,6 +2,8 @@
 
 #include <Arduino.h>
 #include <ESP8266WiFi.h>
+#include "ArduinoJson.h"
+#include <LittleFS.h>
 
 #include <configurations.h>
 #include "../include/secrets.h"
@@ -21,7 +23,8 @@ class WifiManager {
         void init();
         void generateMacSerialTruncated();
 
-        bool saveCredentials(const String& ssid, const String& password);
+        bool saveWifiCredentials(const String& ssid, const String& password);
+        bool connectWithSavedWifiCredentials();
 
         void startAccessPoint();
         void connect();

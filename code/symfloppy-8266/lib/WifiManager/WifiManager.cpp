@@ -30,7 +30,6 @@ void WifiManager::connect() {
     Serial.println();
     Serial.print("Connected, IP address: ");
     Serial.println(WiFi.localIP());
-  
 }
 
 void WifiManager::disconnect() {
@@ -74,4 +73,8 @@ bool WifiManager::saveWifiCredentials(const String& ssid, const String& password
     return true;
 }
 
+// @todo implement
+bool WifiManager::connectWithSavedWifiCredentials() {
 
+    return true;
+}
