@@ -44,6 +44,8 @@ void WifiManager::reconnect() {
     this->waitForConnection();
 }
 
+
+// SHould implement max tries
 void WifiManager::waitForConnection() {
     while (WiFi.status() != WL_CONNECTED) {
         delay(200);
@@ -53,12 +55,10 @@ void WifiManager::waitForConnection() {
 
 
 bool WifiManager::saveWifiCredentials(const String& ssid, const String& password) {
-    // generate json document
     DynamicJsonDocument doc(512);
     doc["ssid"] = ssid;
     doc["password"] = password;
 
-    // save to LittleFS
     File file = LittleFS.open("/credentials.json", "w");
     if (!file) {
         Serial.println("Failed to open file for writing");
@@ -73,8 +73,33 @@ bool WifiManager::saveWifiCredentials(const String& ssid, const String& password
     return true;
 }
 
-// @todo implement
+
 bool WifiManager::connectWithSavedWifiCredentials() {
 
+    File file = LittleFS.open("/credentials.json", "r");
+    if (!file) {
+        Serial.println("No saved WiFi credentials found");
+        return false;
+    }
+    DynamicJsonDocument doc(512);
+    DeserializationError error = deserializeJson(doc, file);
+    file.close();
+    if (error) {
+        Serial.println("Failed to parse saved WiFi credentials");
+        return false;
+    }
+    String ssid = doc["ssid"];
+    String password = doc["password"];
+    if (ssid.isEmpty() || password.isEmpty()) {
+        Serial.println("Saved WiFi credentials are empty");
+        return false;
+    }
+    Serial.println("Connecting with saved WiFi credentials...");
+    WiFi.begin(ssid, password);
+    Serial.print("Connecting");
+    this->waitForConnection();
+    Serial.println();
+    Serial.print("Connected, IP address: ");
+    Serial.println(WiFi.localIP());
     return true;
 }
