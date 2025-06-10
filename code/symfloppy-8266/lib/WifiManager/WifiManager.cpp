@@ -5,7 +5,7 @@ WifiManager::WifiManager() {
 }
 
 void WifiManager::init() {
-
+    
 }
 
 void WifiManager::generateMacSerialTruncated() {
