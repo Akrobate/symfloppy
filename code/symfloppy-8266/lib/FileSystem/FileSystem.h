@@ -8,7 +8,9 @@ class FileSystem {
         
         FileSystem();
         void init();
+        fs::FS * getFS();
 
     private:
+        bool is_inited = false;
 
 };

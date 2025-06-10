@@ -12,3 +12,12 @@ void FileSystem::init() {
         Serial.println("File system mounted successfully");
     }
 }
+
+
+fs::FS * FileSystem::getFS() {
+    if (!this->is_inited) {
+        this->init();
+        this->is_inited = true;
+    }
+    return this->fs;
+}
