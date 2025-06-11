@@ -8,6 +8,7 @@
 #include <Player.h>
 #include <ButtonsInterface.h>
 #include <LedInterface.h>
+#include <FileSystem.h>
 
 #include <configurations.h>
 #include <secrets.h>
@@ -21,12 +22,14 @@ ButtonsInterface * buttons_interface = new ButtonsInterface();
 LedInterface * led_interface = new LedInterface();
 WifiManager * wifi_manager = new WifiManager();
 MidiFileManager * midi_file_manager = new MidiFileManager();
-
+FileSystem * file_system = new FileSystem();
 
 void setup() {
 
     Serial.begin(115200);
     led_interface->init();
+
+    file_system->init();
 
     wifi_manager->startAccessPoint();
     wifi_manager->connect();
