@@ -93,4 +93,6 @@ module insertThrow(
 }
 
 
-holderPiece();
+holderPiece(
+    _fn = 256
+);

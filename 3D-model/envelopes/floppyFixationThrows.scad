@@ -1,9 +1,9 @@
 floppyFixationThrows();
 
 module floppyFixationThrows(
-    _fn = 100,
     z_size = 40,
-    throws_diameter = 3.5
+    throws_diameter = 3.5,
+    _fn = 100
 ) {
 
     x_gap = 94;
