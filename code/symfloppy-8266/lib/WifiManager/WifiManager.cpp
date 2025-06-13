@@ -103,3 +103,21 @@ bool WifiManager::connectWithSavedWifiCredentials() {
     Serial.println(WiFi.localIP());
     return true;
 }
+
+
+void WifiManager::initMDNS() {
+    if (MDNS.begin(this->mdns_hostname)) {
+        this->is_configured_mdns = true;
+        Serial.println("mDNS configured");
+    } else {
+        this->is_configured_mdns = false;
+        Serial.println("mDNS error");
+    }
+}
+
+// @todo: add to main loop
+void WifiManager::updateMDNS() {
+    if (this->is_configured_mdns) {
+        MDNS.update();
+    }
+}
