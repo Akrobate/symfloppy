@@ -114,6 +114,7 @@ void loop() {
     player->update();
     frequency_generator->update();
     buttons_interface->update();
+    wifi_manager->updateMDNS();
 
     if (buttons_interface->onLeft()) {
         playPreviousFile();

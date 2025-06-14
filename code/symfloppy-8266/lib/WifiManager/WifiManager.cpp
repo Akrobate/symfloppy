@@ -30,6 +30,8 @@ void WifiManager::connect() {
     Serial.println();
     Serial.print("Connected, IP address: ");
     Serial.println(WiFi.localIP());
+    this->initMDNS();
+
 }
 
 void WifiManager::disconnect() {
@@ -42,6 +44,7 @@ void WifiManager::reconnect() {
     WiFi.mode(WIFI_STA);
     WiFi.begin();
     this->waitForConnection();
+    this->initMDNS();
 }
 
 
