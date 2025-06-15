@@ -118,9 +118,12 @@ void WifiManager::initMDNS() {
     }
 }
 
-// @todo: add to main loop
+
 void WifiManager::updateMDNS() {
     if (this->is_configured_mdns) {
+        if (!MDNS.isRunning()) {
+            this->initMDNS();
+        }
         MDNS.update();
     }
 }
