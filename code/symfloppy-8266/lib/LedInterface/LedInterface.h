@@ -12,7 +12,18 @@ class LedInterface {
     private:
         CRGB leds[3];
 
+        unsigned long last_time = 0;
+        unsigned int period_duration = 1000;
+        boolean loop_animation = false;
+
+        int animation;
+        void animationBlinking();
+        int hue = 0;
+
     public:
+        static constexpr int ANIMATION_NO_ANIMATION = 0;
+        static constexpr int ANIMATION_BLINKING = 1;
+
         LedInterface();
         void init();
 
@@ -21,5 +32,8 @@ class LedInterface {
 
         void off();
         void show();
+
+        void update();
+        void resetAnimation();
 
 };

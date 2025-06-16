@@ -35,3 +35,53 @@ void LedInterface::show() {
     FastLED.delay(1);
     FastLED.show();
 }
+
+
+void LedInterface::update() {
+    switch (this->animation) {
+        case ANIMATION_BLINKING:
+            this->animationBlinking();
+            break;
+        default:
+            break;
+    }
+}
+
+
+void LedInterface::animationBlinking() {
+    unsigned long _millis = millis();
+    if (_millis < this->last_time + this->period_duration) {
+
+        if (_millis < this->last_time + this->period_duration / 2) {
+            for (int i = 0; i < 4; i++) {
+                leds[i] = CHSV(
+                    this->hue,
+                    255,
+                    map(_millis - (this->last_time), 0, this->period_duration / 2, 0, 255) % 256
+                );
+            }
+        } else {
+            for (int i = 0; i < 4; i++) {
+                leds[i] = CHSV(
+                    this->hue,
+                    255,
+                    (255 - map(_millis - this->last_time - this->period_duration / 2, 0, this->period_duration / 2, 0, 255)) % 256
+                );
+            }
+        }
+        FastLED.show();
+
+    } else {
+        if (this->loop_animation) {
+            this->last_time = _millis;
+        } else {
+            this->resetAnimation();
+        }
+    }
+}
+
+void LedInterface::resetAnimation() {
+    this->animation = ANIMATION_NO_ANIMATION;
+    this->hue = 0;
+    this->off();
+}
