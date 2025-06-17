@@ -85,3 +85,12 @@ void LedInterface::resetAnimation() {
     this->hue = 0;
     this->off();
 }
+
+
+void LedInterface::triggerBlinkingAnimation(uint8_t hue, unsigned long period_duration, bool loop_animation) {
+    this->animation = ANIMATION_BLINKING;
+    this->hue = hue;
+    this->period_duration = period_duration;
+    this->loop_animation = loop_animation;
+    this->last_time = millis();
+}
