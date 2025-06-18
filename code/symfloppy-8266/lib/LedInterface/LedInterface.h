@@ -5,12 +5,12 @@
 #include <configurations.h>
 
 #define PIN_NEOPIXEL_LED    PIN_NEOPIXEL // PIN_D6
-
+#define NUM_LEDS          3
 
 class LedInterface {
 
     private:
-        CRGB leds[3];
+        CRGB leds[NUM_LEDS];
 
         unsigned long last_time = 0;
         unsigned int period_duration = 1000;

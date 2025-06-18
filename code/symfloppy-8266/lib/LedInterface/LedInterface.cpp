@@ -7,27 +7,33 @@ LedInterface::LedInterface() {
 void LedInterface::init() {
     pinMode(PIN_NEOPIXEL_LED, OUTPUT);
     digitalWrite(PIN_NEOPIXEL_LED, LOW);
-    for(int i = 0; i < 3; i++) {
+    for(int i = 0; i < NUM_LEDS; i++) {
         this->leds[i] = CRGB::Black;
     }
-    FastLED.addLeds<NEOPIXEL, PIN_NEOPIXEL_LED>(this->leds, 3);
+    FastLED.addLeds<NEOPIXEL, PIN_NEOPIXEL_LED>(this->leds, NUM_LEDS);
     FastLED.clear();
     FastLED.delay(1);
     FastLED.show();
 }
 
 void LedInterface::onGreen() {
-    this->leds[0] = CRGB::Green;
+    for (int i = 0; i < NUM_LEDS; i++) {
+        this->leds[i] = CRGB::Green;
+    }
     this->show();
 }
 
 void LedInterface::onRed() {
-    this->leds[0] = CRGB::Red;
+    for (int i = 0; i < NUM_LEDS; i++) {
+        this->leds[i] = CRGB::Red;
+    }
     this->show();
 }
 
 void LedInterface::off() {
-    this->leds[0] = CRGB::Black;
+    for (int i = 0; i < NUM_LEDS; i++) {
+        this->leds[i] = CRGB::Black;
+    }
     this->show();
 }
 
@@ -53,7 +59,7 @@ void LedInterface::animationBlinking() {
     if (_millis < this->last_time + this->period_duration) {
 
         if (_millis < this->last_time + this->period_duration / 2) {
-            for (int i = 0; i < 4; i++) {
+            for (int i = 0; i < NUM_LEDS; i++) {
                 leds[i] = CHSV(
                     this->hue,
                     255,
@@ -61,7 +67,7 @@ void LedInterface::animationBlinking() {
                 );
             }
         } else {
-            for (int i = 0; i < 4; i++) {
+            for (int i = 0; i < NUM_LEDS; i++) {
                 leds[i] = CHSV(
                     this->hue,
                     255,
@@ -69,7 +75,7 @@ void LedInterface::animationBlinking() {
                 );
             }
         }
-        FastLED.show();
+        this->show();
 
     } else {
         if (this->loop_animation) {
