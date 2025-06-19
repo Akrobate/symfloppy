@@ -54,6 +54,28 @@ void LedInterface::update() {
 }
 
 
+void LedInterface::animationFixedColor() {
+    unsigned long _millis = millis();
+    if (_millis < this->last_time + this->period_duration) {
+        for (int i = 0; i < NUM_LEDS; i++) {
+            this->leds[i] = CHSV(
+                this->hue,
+                255,
+                map(_millis - (this->last_time), 0, this->period_duration / 2, 0, 255) % 256
+            );
+        }
+        this->show();
+    } else {
+        if (this->loop_animation) {
+            this->last_time = _millis;
+        } else {
+            this->resetAnimation();
+        }
+    }
+}
+
+
+
 void LedInterface::animationBlinking() {
     unsigned long _millis = millis();
     if (_millis < this->last_time + this->period_duration) {

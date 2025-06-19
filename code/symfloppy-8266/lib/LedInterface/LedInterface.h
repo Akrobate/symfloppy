@@ -18,6 +18,7 @@ class LedInterface {
 
         int animation;
         void animationBlinking();
+        void animationFixedColor();
         int hue = 0;
 
     public:
