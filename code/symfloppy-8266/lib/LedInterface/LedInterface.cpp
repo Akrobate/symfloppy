@@ -48,6 +48,9 @@ void LedInterface::update() {
         case ANIMATION_BLINKING:
             this->animationBlinking();
             break;
+        case ANIMATION_FIXED_COLOR:
+            this->animationFixedColor();
+            break;
         default:
             break;
     }
@@ -120,5 +123,14 @@ void LedInterface::triggerBlinkingAnimation(uint8_t hue, unsigned long period_du
     this->hue = hue;
     this->period_duration = period_duration;
     this->loop_animation = loop_animation;
+    this->last_time = millis();
+}
+
+
+void LedInterface::triggerFixedColor(uint8_t hue) {
+    this->animation = ANIMATION_FIXED_COLOR;
+    this->hue = hue;
+    this->period_duration = 500; // 2 seconds
+    this->loop_animation = true;
     this->last_time = millis();
 }

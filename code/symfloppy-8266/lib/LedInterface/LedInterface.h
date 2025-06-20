@@ -24,6 +24,7 @@ class LedInterface {
     public:
         static constexpr int ANIMATION_NO_ANIMATION = 0;
         static constexpr int ANIMATION_BLINKING = 1;
+        static constexpr int ANIMATION_FIXED_COLOR = 2;
 
         LedInterface();
         void init();
@@ -37,5 +38,5 @@ class LedInterface {
         void update();
         void resetAnimation();
         void triggerBlinkingAnimation(uint8_t hue, unsigned long period_duration, bool loop_animation = false);
-
+        void triggerFixedColor(uint8_t hue);
 };
