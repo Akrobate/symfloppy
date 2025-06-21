@@ -37,6 +37,10 @@ class LedInterface {
 
         void update();
         void resetAnimation();
+
         void triggerBlinkingAnimation(uint8_t hue, unsigned long period_duration, bool loop_animation = false);
         void triggerFixedColor(uint8_t hue);
+        void triggerFixedColorGreen();
+        void triggerFixedColorRed();
 };
+

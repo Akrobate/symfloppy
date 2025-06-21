@@ -134,3 +134,13 @@ void LedInterface::triggerFixedColor(uint8_t hue) {
     this->loop_animation = true;
     this->last_time = millis();
 }
+
+
+void LedInterface::triggerFixedColorGreen() {
+    this->triggerFixedColor(128);
+}
+
+
+void LedInterface::triggerFixedColorRed() {
+    this->triggerFixedColor(0);
+}
