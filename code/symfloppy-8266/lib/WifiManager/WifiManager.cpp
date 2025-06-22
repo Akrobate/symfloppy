@@ -25,10 +25,9 @@ void WifiManager::startAccessPoint() {
 
 void WifiManager::connect() {
     WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
-    Serial.print("Connecting");
+    Serial.println("Connecting");
     this->waitForConnection();
-    Serial.println();
-    Serial.print("Connected, IP address: ");
+    Serial.println("Connected, IP address: ");
     Serial.println(WiFi.localIP());
     this->initMDNS();
 
@@ -50,10 +49,14 @@ void WifiManager::reconnect() {
 
 // SHould implement max tries
 void WifiManager::waitForConnection() {
-    while (WiFi.status() != WL_CONNECTED) {
-        delay(200);
+    int attempts = 0;
+    const int max_attempts = 20;
+    while (WiFi.status() != WL_CONNECTED && attempts < max_attempts) {
+        delay(500);
         Serial.print(".");
+        attempts++;
     }
+    this->is_connected = (WiFi.status() == WL_CONNECTED);
 }
 
 
