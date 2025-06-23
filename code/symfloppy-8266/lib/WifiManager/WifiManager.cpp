@@ -47,7 +47,6 @@ void WifiManager::reconnect() {
 }
 
 
-// SHould implement max tries
 void WifiManager::waitForConnection() {
     int attempts = 0;
     const int max_attempts = 20;
@@ -96,15 +95,16 @@ bool WifiManager::connectWithSavedWifiCredentials() {
     }
     String ssid = doc["ssid"];
     String password = doc["password"];
+
     if (ssid.isEmpty() || password.isEmpty()) {
         Serial.println("Saved WiFi credentials are empty");
         return false;
     }
+
     Serial.println("Connecting with saved WiFi credentials...");
     WiFi.begin(ssid, password);
-    Serial.print("Connecting");
+    Serial.print("Connecting...");
     this->waitForConnection();
-    Serial.println();
     Serial.print("Connected, IP address: ");
     Serial.println(WiFi.localIP());
     return true;
