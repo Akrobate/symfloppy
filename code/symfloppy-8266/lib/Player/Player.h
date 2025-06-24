@@ -8,7 +8,7 @@
 
 
 typedef std::function<void(Note * note)> NoteEventFunction;
-typedef std::function<void()> StopPlayingEventFunction;
+typedef std::function<void()> PlayingEventFunction;
 
 class Player {
     public:
@@ -18,7 +18,8 @@ class Player {
         void setChannel(unsigned int channel);
         void setFileName(String file_name);
         void onNoteEvent(NoteEventFunction on_note_function);
-        void onStopPlayingEvent(StopPlayingEventFunction on_stop_playing_function);
+        void onStopPlayingEvent(PlayingEventFunction callback_function);
+        void onStartPlayingEvent(PlayingEventFunction callback_function);
         void findNextNote();
 
         void play();
@@ -42,7 +43,8 @@ class Player {
         unsigned long time_millis;
         Note * note;
         NoteEventFunction on_note_function;
-        StopPlayingEventFunction on_stop_playing_function;
+        PlayingEventFunction on_stop_playing_function = nullptr;
+        PlayingEventFunction on_start_playing_function = nullptr;
 
         void closeFile();
 };

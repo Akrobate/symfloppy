@@ -138,8 +138,12 @@ void Player::onNoteEvent(NoteEventFunction on_note_function) {
 }
 
 
-void Player::onStopPlayingEvent(StopPlayingEventFunction on_stop_playing_function) {
-    this->on_stop_playing_function = on_stop_playing_function;
+void Player::onStopPlayingEvent(PlayingEventFunction callback_function) {
+    this->on_stop_playing_function = callback_function;
+}
+
+void Player::onStartPlayingEvent(PlayingEventFunction callback_function) {
+    this->on_start_playing_function = callback_function;
 }
 
 
@@ -147,6 +151,9 @@ void Player::play() {
     this->is_playing = true;
     this->is_finished = false;
     this->error_occurred = false;
+    if (this->on_start_playing_function) {
+        this->on_start_playing_function();
+    }
 }
 
 
