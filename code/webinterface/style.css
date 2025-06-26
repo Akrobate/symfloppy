@@ -19,9 +19,7 @@ body {
 .block .content {
     margin: 20px;
 }
-span {
-    font-style: italic;  
-}
+
 .valid {
     color: #006600;
 }
@@ -76,4 +74,8 @@ ul.list .actions {
     display: flex;
     justify-content: flex-end;
     align-items: center;    
+}
+
+.remove {
+    cursor: pointer;
 }

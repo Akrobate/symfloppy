@@ -56,10 +56,13 @@ app.post('/upload', upload.single("file"), (request, response) => {
 
 app.get('/files', (request, response) => {
     const file_list = fs.readdirSync('./data');
-    const formated_file_list = file_list.map((file) => ({
-       filename: file,
-       size: 123, 
-    }));
+    const formated_file_list = file_list
+        .map((file) => ({
+            filename: file,
+            size: fs.statSync('./data/' + file).size,
+        }))
+        .filter((file) => file.filename.endsWith('.mid'));
+
     response.status(200).json({
         file_list: formated_file_list
     });
