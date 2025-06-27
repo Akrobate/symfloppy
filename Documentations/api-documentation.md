@@ -83,9 +83,9 @@ Réponse :
 
 ```json
 {
-  "totalBytes": 14680064,
-  "usedBytes": 352256,
-  "freeBytes": 14327808
+  "fs_total_bytes": 14680064,
+  "fs_total_bytes": 352256,
+  "fs_total_bytes": 14327808
 }
 
 ```

@@ -128,9 +128,9 @@ void SymfloppyServer::init() {
 
 			FSInfo fs_info;
 			LittleFS.info(fs_info);
-			json["totalBytes"] = fs_info.totalBytes;
-			json["usedBytes"] = fs_info.usedBytes;
-			json["freeBytes"] = fs_info.totalBytes - fs_info.usedBytes;
+			json["fs_total_bytes"] = fs_info.fs_total_bytes;
+			json["fs_total_bytes"] = fs_info.fs_total_bytes;
+			json["fs_total_bytes"] = fs_info.fs_total_bytes - fs_info.fs_total_bytes;
 			serializeJson(json, *response);
 			request->send(response);
 		}
