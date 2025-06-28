@@ -110,12 +110,15 @@ void SymfloppyServer::init() {
       AsyncResponseStream *response = request->beginResponseStream("application/json");
       DynamicJsonDocument json(256);
 
-        FSInfo fs_info;
-        LittleFS.info(fs_info);
+      FSInfo fs_info;
+      LittleFS.info(fs_info);
 
-        json["fs_total_bytes"] = fs_info.totalBytes;
-        json["fs_used_bytes"] = fs_info.usedBytes;
-        json["fs_free_bytes"] = fs_info.totalBytes - fs_info.usedBytes;
+      json["fs_total_bytes"] = fs_info.totalBytes;
+      json["fs_used_bytes"] = fs_info.usedBytes;
+      json["fs_free_bytes"] = fs_info.totalBytes - fs_info.usedBytes;
+      json["free_heap"] = ESP.getFreeHeap();
+      json["heap_fragmentation"] = ESP.getHeapFragmentation();
+      json["max_free_block_size"] = ESP.getMaxFreeBlockSize();
 
       serializeJson(json, *response);
       request->send(response);
