@@ -14,6 +14,7 @@ void WifiManager::generateMacSerialTruncated() {
     this->mac_serial_truncated = mac_serial.substring(0, 4);  
 }
 
+
 void WifiManager::startAccessPoint() {
     delay(1000); // To test if is required
     this->generateMacSerialTruncated();
@@ -21,7 +22,7 @@ void WifiManager::startAccessPoint() {
     // String ssid = "SYMFLOPPY_" + this->mac_serial_truncated;
     // WiFi.softAP(ssid.c_str());
     WiFi.softAP(WIFI_ACCESS_POINT_SSID, WIFI_ACCESS_POINT_PASSWORD);
-    Serial.println("Access Point started with SSID: " + WIFI_ACCESS_POINT_SSID + " and Password: " + WIFI_ACCESS_POINT_PASSWORD);
+    Serial.println("Access Point started with SSID: " + String(WIFI_ACCESS_POINT_SSID) + " and Password: " + String(WIFI_ACCESS_POINT_PASSWORD));
 }
 
 
