@@ -108,9 +108,18 @@ void playPreviousFile() {
     playFile(playing_file_index);
 }
 
-
+unsigned long fps = 0;
+unsigned long last_fps_time = 0;
 
 void loop() {
+    fps++;
+
+    if (millis() - last_fps_time >= 1000) {
+        last_fps_time = millis();
+        server->fps = fps;
+        fps = 0;
+    }
+
     player->update();
     frequency_generator->update();
     buttons_interface->update();

@@ -134,6 +134,7 @@ void SymfloppyServer::init() {
 			json["free_heap"] = ESP.getFreeHeap();
 			json["heap_fragmentation"] = ESP.getHeapFragmentation();
 			json["max_free_block_size"] = ESP.getMaxFreeBlockSize();
+			json["fps"] = this->fps;
 			serializeJson(json, *response);
 			request->send(response);
 		}

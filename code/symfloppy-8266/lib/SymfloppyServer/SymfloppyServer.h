@@ -34,6 +34,8 @@ class SymfloppyServer {
         void init();
         void begin();
 
+        unsigned long fps = 0;
+
         void injectMidiFileManager(MidiFileManager * midi_file_manager);
 };
 
