@@ -177,3 +177,6 @@ void SymfloppyServer::init() {
 
 }
 
+void SymfloppyServer::setFps(unsigned long fps) {
+	this->fps = fps;
+}

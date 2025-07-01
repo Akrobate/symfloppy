@@ -116,7 +116,7 @@ void loop() {
 
     if (millis() - last_fps_time >= 1000) {
         last_fps_time = millis();
-        server->fps = fps;
+        server->setFpsf(fps);
         fps = 0;
     }
 
