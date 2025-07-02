@@ -23,6 +23,21 @@ WifiManager * wifi_manager = new WifiManager();
 MidiFileManager * midi_file_manager = new MidiFileManager();
 
 
+bool is_playing = false;
+bool is_paused = false;
+int playing_file_index = 0;
+
+unsigned long fps = 0;
+unsigned long last_fps_time = 0;
+
+
+void playPreviousFile();
+void playNextFile();
+void stop();
+void playFile(int file_index);
+void updateFps();
+
+
 void setup() {
 
     Serial.begin(115200);
@@ -67,11 +82,6 @@ void setup() {
     // wifi_manager->disconnect();
 }
 
-bool is_playing = false;
-bool is_paused = false;
-
-int playing_file_index = 0;
-
 
 void playFile(int file_index) {
     const MidiFileManager::MidiFile* file = midi_file_manager->getFileAt(file_index);
@@ -87,10 +97,12 @@ void playFile(int file_index) {
     }
 }
 
+
 void stop() {
     player->stop();
     is_playing = false;
 }
+
 
 void playNextFile() {
     playing_file_index++;
@@ -100,6 +112,7 @@ void playNextFile() {
     playFile(playing_file_index);
 }
 
+
 void playPreviousFile() {
     playing_file_index--;
     if (playing_file_index < 0) {
@@ -108,17 +121,18 @@ void playPreviousFile() {
     playFile(playing_file_index);
 }
 
-unsigned long fps = 0;
-unsigned long last_fps_time = 0;
 
-void loop() {
+void updateFps() {
     fps++;
-
     if (millis() - last_fps_time >= 1000) {
         last_fps_time = millis();
-        server->setFpsf(fps);
+        server->setFps(fps);
         fps = 0;
     }
+}
+
+
+void loop() {
 
     player->update();
     frequency_generator->update();
@@ -135,7 +149,6 @@ void loop() {
         // led_interface->off();
     }
 
-
     if (buttons_interface->onMiddle()) {
         if (is_playing) {
             stop();
@@ -145,5 +158,5 @@ void loop() {
             led_interface->onGreen();
         }
     }
-
 }
+
