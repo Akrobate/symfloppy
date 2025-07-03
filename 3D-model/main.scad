@@ -9,7 +9,7 @@ include <./configurations/global.scad>
 
 translate([0, symfloppy_box_y_size / 2 + 1, symfloppy_box_z_size / 2])
     rotate([0,0,180])
-    holder8266D1Component();    
+        holder8266D1Component();    
 
 
 if (SHOW_FLOPPY_DRIVE)
