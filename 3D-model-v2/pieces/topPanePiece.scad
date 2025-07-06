@@ -1,4 +1,5 @@
 use <./subpieces/centeredPaneSubPiece.scad>
+use <./subpieces/roundedPane.scad>
 use <../envelopes/floppyFixationThrows.scad>
 use <../envelopes/buttonAssetThrow.scad>
 use <../envelopes/holdersPiecesThrows.scad>
@@ -22,13 +23,25 @@ module topPanePiece(
     button_x_center_offset = button_x_center_offset,
 
     holder_piece_x_from_z_offset = holder_piece_x_from_z_offset,
+
+    round_edges_radius = facade_front_round_edges_radius,
+    _fn = 100
+
 ) {
     throws_z_size = 40;
     throws_diameter = 3.5;
 
     echo("topPanePiece", x_size=x_size, y_size=y_size);
     difference() {
-        centeredPaneSubPiece(x_size, y_size, pane_thickness);
+        roundedPane(
+            [x_size, y_size, pane_thickness],
+            r1 = round_edges_radius,
+            r2 = round_edges_radius,
+            center = true,
+            $fn = _fn
+        );
+
+
         floppyFixationThrows(
             z_size = throws_z_size,
             throws_diameter = throws_diameter
