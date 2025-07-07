@@ -1,4 +1,5 @@
 use <./subpieces/centeredPaneSubPiece.scad>
+use <./subpieces/roundedPane.scad>
 use <../envelopes/din5.scad>
 use <../assets/esp-module-holder-3d-model/pieces/throws-holder-external-fix.scad>
 
@@ -14,7 +15,9 @@ include <../configurations/global.scad>
 module backPanePiece(
     x_size = symfloppy_box_x_size,
     y_size = symfloppy_box_z_size - symfloppy_box_pane_thickness * 2,
-    pane_thickness = symfloppy_box_pane_thickness
+    pane_thickness = symfloppy_box_pane_thickness,
+    round_edges_radius = facade_front_round_edges_radius,
+    _fn = 100
 ) {
     echo("backPanePiece", x_size=x_size, y_size=y_size);
 
@@ -22,8 +25,13 @@ module backPanePiece(
 
     difference() {
 
-        
-        centeredPaneSubPiece(x_size, y_size, pane_thickness);
+        roundedPane(
+            [x_size, y_size, pane_thickness],
+            r1 = round_edges_radius,
+            r2 = round_edges_radius,
+            center = true,
+            $fn = _fn
+        );
 
         translate([0,0,-4])
             throwsHolderExternalFix(
