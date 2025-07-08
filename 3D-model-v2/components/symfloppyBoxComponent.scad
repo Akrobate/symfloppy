@@ -6,6 +6,9 @@ use <../pieces/frontPanePiece.scad>
 use <../pieces/leftPanePiece.scad>
 use <../pieces/rightPanePiece.scad>
 
+
+use <../pieces/housingBorderPiece.scad>
+
 include <../configurations/global.scad>
 
 
@@ -28,8 +31,14 @@ module symfloppyBoxComponent(
     color_2 = "Peru";
     color_3 = "SaddleBrown";
 
+
+    translate([-symfloppy_box_x_size / 2, -symfloppy_box_y_size / 2, pane_thickness])
+    color(color_2)
+        housingBorderPiece();
+
     translate([0, 0, (center_z ? 0 : z_size / 2)]) {
-        color(color_2) {
+
+        *color(color_2) {
             translate([0, -(y_size / 2 - pane_thickness / 2), 0])
                 rotate([90,0,0])
                     frontPanePiece();
@@ -39,7 +48,7 @@ module symfloppyBoxComponent(
                     backPanePiece();
         }
 
-        color(color_3) {
+        *color(color_3) {
             translate([-(x_size / 2 - pane_thickness / 2), 0, 0])
                 rotate([90,0,90])
                     leftPanePiece();
