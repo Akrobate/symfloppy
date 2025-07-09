@@ -1,5 +1,4 @@
 use <./components/symfloppyBoxComponent.scad>
-use <./pieces/holderPiece.scad>
 use <./assets/buttonAsset.scad>
 use <./assets/FloppyDrive/FloppyDrive.scad>
 use <./assets/esp-module-holder-3d-model/components/holder-8266-D1-component.scad>
@@ -26,39 +25,5 @@ if (SHOW_BUTTON_ASSETS)
         for (x_coord=[-button_x_spaces, 0, button_x_spaces])
             translate([x_coord, 0, 0])
                 buttonAsset();
-
-
-if (SHOW_HOLDER_PIECE) {
-    translate([
-        symfloppy_box_x_size / 2 - holder_piece_x_from_z_offset - symfloppy_box_pane_thickness,
-        holder_piece_y_centered_holder_piece_gap / 2,
-        symfloppy_box_pane_thickness
-    ])
-        holderPiece();
-
-
-    translate([
-        symfloppy_box_x_size / 2 - holder_piece_x_from_z_offset - symfloppy_box_pane_thickness,
-        -holder_piece_y_centered_holder_piece_gap / 2,
-        symfloppy_box_pane_thickness
-    ])
-        holderPiece();
-
-    translate([
-        - symfloppy_box_x_size / 2 + holder_piece_x_from_z_offset + symfloppy_box_pane_thickness,
-        holder_piece_y_centered_holder_piece_gap / 2,
-        symfloppy_box_pane_thickness
-    ])
-        rotate([0,0,180])
-            holderPiece();
-    
-    translate([
-        - symfloppy_box_x_size / 2 + holder_piece_x_from_z_offset + symfloppy_box_pane_thickness,
-        -holder_piece_y_centered_holder_piece_gap / 2,
-        symfloppy_box_pane_thickness
-    ])
-        rotate([0,0,180])
-            holderPiece();
-}
 
 symfloppyBoxComponent();
