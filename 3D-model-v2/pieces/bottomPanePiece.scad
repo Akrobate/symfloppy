@@ -1,6 +1,5 @@
 use <./subpieces/centeredPaneSubPiece.scad>
 use <./subpieces/roundedPane.scad>
-use <../envelopes/holdersPiecesThrows.scad>
 
 include <../configurations/global.scad>
 
@@ -29,13 +28,6 @@ module bottomPanePiece(
             r2 = round_edges_radius,
             center = true,
             $fn = _fn
-        );
-
-        holdersPiecesThrows(
-            symfloppy_box_x_size = x_size,
-            holder_piece_x_from_z_offset = holder_piece_x_from_z_offset,
-            symfloppy_box_pane_thickness = pane_thickness,
-            throws_diameter = 3.5
         );
     }
 }
