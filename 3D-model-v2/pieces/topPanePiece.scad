@@ -24,6 +24,8 @@ module topPanePiece(
 
     holder_piece_x_from_z_offset = holder_piece_x_from_z_offset,
 
+    floppy_y_offset = floppy_y_offset,
+
     round_edges_radius = facade_front_round_edges_radius,
     facade_throws_margin = facade_throws_margin,
     _fn = 100
@@ -50,23 +52,25 @@ module topPanePiece(
             $fn = _fn
         );
 
+        translate([0, floppy_y_offset, 0])
         floppyFixationThrows(
             z_size = pane_thickness * 4,
             throws_diameter = throws_diameter
         );
 
-        translate([
-            button_x_center_offset,
-            -y_size / 2 + button_y_front_offset,
-            0
-        ]) {
-            translate([-button_x_spaces, 0, 0])
-                buttonAssetThrow();
-            translate([0, 0, 0])
-                buttonAssetThrow();
-            translate([button_x_spaces, 0, 0])
-                buttonAssetThrow();
-        }
+        if (SHOW_BUTTON_ON_TOP_ASSETS)
+            translate([
+                button_x_center_offset,
+                -y_size / 2 + button_y_front_offset,
+                0
+            ]) {
+                translate([-button_x_spaces, 0, 0])
+                    buttonAssetThrow();
+                translate([0, 0, 0])
+                    buttonAssetThrow();
+                translate([button_x_spaces, 0, 0])
+                    buttonAssetThrow();
+            }
 
 
         translate([-x_size / 2, -y_size / 2])

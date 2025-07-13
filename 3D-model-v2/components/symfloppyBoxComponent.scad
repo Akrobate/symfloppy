@@ -3,9 +3,6 @@ use <../pieces/topPanePiece.scad>
 use <../pieces/bottomPanePiece.scad>
 use <../pieces/backPanePiece.scad>
 use <../pieces/frontPanePiece.scad>
-use <../pieces/leftPanePiece.scad>
-use <../pieces/rightPanePiece.scad>
-
 
 use <../pieces/housingBorderPiece.scad>
 
