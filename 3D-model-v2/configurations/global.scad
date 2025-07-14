@@ -33,3 +33,6 @@ holder_piece_x_from_z_offset = 5;
 holder_piece_y_centered_holder_piece_gap = 120;
 
 
+// UsbConnector
+usbConnectorThrowEnveloppe_margin = 0.25;
+usbConnectorThrowEnveloppe_fn = 100;
