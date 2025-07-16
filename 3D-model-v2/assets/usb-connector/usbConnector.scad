@@ -20,14 +20,13 @@ module usbConnector(
 
                 // Bottom part
                 bottom_part_z_size = total_z_size - head_z_size;
-                    translate([0, 0, -bottom_part_z_size])
-                        intersection() {
-                            cylinder(d = bottom_part_diameter, h = bottom_part_z_size, $fn = 60);
-                            
-                            translate([-bottom_part_diameter / 2, -bottom_part_flat_size / 2, 0])
-                                cube([bottom_part_diameter, bottom_part_flat_size, bottom_part_z_size]);
-
-                        }
+                translate([0, 0, -bottom_part_z_size])
+                    intersection() {
+                        cylinder(d = bottom_part_diameter, h = bottom_part_z_size, $fn = 60);
+                        
+                        translate([-bottom_part_diameter / 2, -bottom_part_flat_size / 2, 0])
+                            cube([bottom_part_diameter, bottom_part_flat_size, bottom_part_z_size]);
+                    }
             }
 
             x_size_total = 8.33;

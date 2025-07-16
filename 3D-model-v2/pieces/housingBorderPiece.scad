@@ -2,7 +2,7 @@ include <../configurations/global.scad>;
 include <../libraries/commons.scad>;
 
 use <./subpieces/roundedPane.scad>
-
+use <../envelopes/usbConnectorThrowEnveloppe.scad>
 
 module housingBorderPiece(
     x_size = symfloppy_box_x_size,
@@ -15,6 +15,7 @@ module housingBorderPiece(
     insert_throw_length = insert_throw_length,
     facade_throws_margin = facade_throws_margin,
 ) {
+
 
     epsilon = 0.1;
 
@@ -70,7 +71,6 @@ module housingBorderPiece(
                         $fn = 100
                     );
         }
-
                 
         // facade inserts throws
         translate([0, 0, -epsilon])
@@ -90,6 +90,11 @@ module housingBorderPiece(
                     center = false,
                     $fn = 100
                 );
+
+        // usb connector throws
+        translate([x_size / 2, y_size, local_z_size / 2])
+            rotate([-90,0,0])
+                usbConnectorThrowEnveloppe();
     }
 
 }
