@@ -3,6 +3,8 @@ include <../libraries/commons.scad>;
 
 use <./subpieces/roundedPane.scad>
 use <../envelopes/usbConnectorThrowEnveloppe.scad>
+use <../envelopes/buttonAssetThrow.scad>
+
 
 module housingBorderPiece(
     x_size = symfloppy_box_x_size,
@@ -95,6 +97,23 @@ module housingBorderPiece(
         translate([x_size / 2, y_size, local_z_size / 2])
             rotate([-90,0,0])
                 usbConnectorThrowEnveloppe();
+
+
+        // Buttons throws
+        if (SHOW_BUTTON_ON_TOP_ASSETS)
+            translate([
+                button_x_center_offset,
+                -y_size / 2 + button_y_front_offset,
+                0
+            ]) {
+                translate([-button_x_spaces, 0, 0])
+                    buttonAssetThrow();
+                translate([0, 0, 0])
+                    buttonAssetThrow();
+                translate([button_x_spaces, 0, 0])
+                    buttonAssetThrow();
+            }
+
     }
 
 }

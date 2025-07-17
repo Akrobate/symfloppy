@@ -15,8 +15,6 @@ translate([0, symfloppy_box_y_size / 2, symfloppy_box_z_size / 2])
     rotate([-90,0,0])
         usbConnector();
 
-
-
 if (SHOW_FLOPPY_DRIVE)
     translate([0, 0 + floppy_y_offset, symfloppy_box_z_size])
         FloppyDrive();

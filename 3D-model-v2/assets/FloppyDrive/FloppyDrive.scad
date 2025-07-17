@@ -1,4 +1,4 @@
-include <../configurations.scad>
+include <./configurations.scad>
 
 
 /**
