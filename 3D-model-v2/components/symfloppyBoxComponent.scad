@@ -1,8 +1,6 @@
 use <../pieces/subpieces/centeredPaneSubPiece.scad>
 use <../pieces/topPanePiece.scad>
 use <../pieces/bottomPanePiece.scad>
-use <../pieces/backPanePiece.scad>
-use <../pieces/frontPanePiece.scad>
 
 use <../pieces/housingBorderPiece.scad>
 

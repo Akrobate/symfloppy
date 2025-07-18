@@ -100,18 +100,12 @@ module housingBorderPiece(
 
 
         // Buttons throws
-        if (SHOW_BUTTON_ON_TOP_ASSETS)
-            translate([
-                button_x_center_offset,
-                -y_size / 2 + button_y_front_offset,
-                0
-            ]) {
-                translate([-button_x_spaces, 0, 0])
-                    buttonAssetThrow();
-                translate([0, 0, 0])
-                    buttonAssetThrow();
-                translate([button_x_spaces, 0, 0])
-                    buttonAssetThrow();
+        
+            translate([x_size / 2 + button_x_center_offset, 0, local_z_size / 2]) {
+                for (x_coord=[-button_x_spaces, 0, button_x_spaces])
+                    translate([-x_coord, 0, 0])
+                        rotate([90,0,0])
+                        buttonAssetThrow();
             }
 
     }
