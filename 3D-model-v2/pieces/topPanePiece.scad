@@ -58,21 +58,6 @@ module topPanePiece(
             throws_diameter = throws_diameter
         );
 
-        if (SHOW_BUTTON_ON_TOP_ASSETS)
-            translate([
-                button_x_center_offset,
-                -y_size / 2 + button_y_front_offset,
-                0
-            ]) {
-                translate([-button_x_spaces, 0, 0])
-                    buttonAssetThrow();
-                translate([0, 0, 0])
-                    buttonAssetThrow();
-                translate([button_x_spaces, 0, 0])
-                    buttonAssetThrow();
-            }
-
-
         translate([-x_size / 2, -y_size / 2])
             forEachCoord(throws_coords_list)
                 cylinder(
