@@ -28,13 +28,13 @@ module topPanePiece(
 
     round_edges_radius = facade_front_round_edges_radius,
     facade_throws_margin = facade_throws_margin,
+    throws_diameter = wood_throw_m3_diameter,
+
     _fn = 100
 
 ) {
 
     echo("topPanePiece", x_size=x_size, y_size=y_size);
-
-    throws_diameter = 3.5; // @todo: wood throw diameter to add to global config
 
     throws_coords_list = [
         [facade_throws_margin, facade_throws_margin],
