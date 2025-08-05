@@ -17,19 +17,14 @@ module topPanePiece(
     x_size = symfloppy_box_x_size,
     y_size = symfloppy_box_y_size,
     pane_thickness = symfloppy_box_pane_thickness,
-
     button_y_front_offset = button_y_front_offset,
     button_x_spaces = button_x_spaces,
     button_x_center_offset = button_x_center_offset,
-
     holder_piece_x_from_z_offset = holder_piece_x_from_z_offset,
-
     floppy_y_offset = floppy_y_offset,
-
     round_edges_radius = facade_front_round_edges_radius,
     facade_throws_margin = facade_throws_margin,
     throws_diameter = wood_throw_m3_diameter,
-
     _fn = 100
 
 ) {

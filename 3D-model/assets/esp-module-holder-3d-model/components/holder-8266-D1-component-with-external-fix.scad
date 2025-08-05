@@ -37,7 +37,6 @@ holder8266D1ComponentWithExternalFix();
                 translate([0,0,1.5])
                     cube([80, 40, 3], center = true);
 
-                // Todo implement external fix
                 translate([0,0,-0.01])
                     throwsHolderExternalFix();
             }
