@@ -2,6 +2,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const fs = require('fs');
 const multer = require('multer');
+const HTTP_CODE = require('http-status');
+
 
 const upload = multer({
     storage: multer.diskStorage({
@@ -40,18 +42,18 @@ app.get('/index.js', (request, response) => {
 });
 
 app.get('/channel', (request, response) => {
-    response.status(200).send(`${channel}`);
+    response.status(HTTP_CODE.OK).send(`${channel}`);
 });
 
 app.post('/channel', upload.array(), (request, response) => {
     console.log(request.body.channel);
     channel = request.body.channel;
-    response.status(200).send(`OK`);
+    response.status(HTTP_CODE.OK).send(`OK`);
 });
 
 app.post('/upload', upload.single("file"), (request, response) => {
     console.log(request.body);
-    response.status(200).send(`OK`);
+    response.status(HTTP_CODE.OK).send(`OK`);
 });
 
 app.get('/files', (request, response) => {
@@ -63,7 +65,7 @@ app.get('/files', (request, response) => {
         }))
         .filter((file) => file.filename.endsWith('.mid'));
 
-    response.status(200).json({
+    response.status(HTTP_CODE.OK).json({
         file_list: formated_file_list
     });
 });
@@ -71,7 +73,7 @@ app.get('/files', (request, response) => {
 app.delete('/files', upload.array(), (request, response) => {
     const filename = request.body.filename;
     fs.unlinkSync('./data/' + filename);
-    response.status(200).send(`OK`);
+    response.status(HTTP_CODE.OK).send(`OK`);
 });
 
 
