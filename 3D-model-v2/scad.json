@@ -3,5 +3,8 @@
   "version": "1.0.0",
   "description": "",
   "author": "",
-  "repository": ""
+  "repository": "",
+  "dependencies": {
+    "housing": "https://gitlab.com/openscad-modules/housing.git#0.0.5"
+  }
 }
