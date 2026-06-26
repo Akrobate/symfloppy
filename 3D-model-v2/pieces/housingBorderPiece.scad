@@ -6,6 +6,13 @@ use <../envelopes/usbConnectorThrowEnveloppe.scad>
 use <../envelopes/buttonAssetThrow.scad>
 
 
+/**
+ * housingBorderPiece
+ * @name housingBorderPiece
+ * @description housingBorderPiece
+ * @type piece
+ * @parent housingComponent
+ */
 module housingBorderPiece(
     x_size = symfloppy_box_x_size,
     y_size = symfloppy_box_y_size,
@@ -56,5 +63,8 @@ module housingBorderPiece(
 
 
 
-
+/**
+ * @png
+ * @colorscheme BeforeDawn
+ */
 housingBorderPiece();

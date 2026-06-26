@@ -10,7 +10,7 @@ include <../configurations/global.scad>
  * @name backPanePiece
  * @description backPanePiece
  * @type piece
- * @parent
+ * @parent housingComponent
  */
 module backPanePiece(
     x_size = symfloppy_box_x_size,
@@ -71,4 +71,8 @@ module backPanePiece(
 }
 
 
+/**
+ * @png
+ * @colorscheme BeforeDawn
+ */
 backPanePiece();

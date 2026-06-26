@@ -11,7 +11,7 @@ include <../configurations/global.scad>
  * @name bottomPanePiece
  * @description bottomPanePiece
  * @type piece
- * @parent
+ * @parent housingComponent
  */
 module bottomPanePiece(
     x_size = symfloppy_box_x_size,
@@ -52,4 +52,10 @@ module bottomPanePiece(
     }
 }
 
+
+/**
+ * @png
+ * @colorscheme BeforeDawn
+ */
 bottomPanePiece();
+

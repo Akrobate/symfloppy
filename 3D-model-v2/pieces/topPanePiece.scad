@@ -11,7 +11,7 @@ include <../configurations/global.scad>
  * @name topPanePiece
  * @description topPanePiece CNC piece
  * @type piece
- * @parent
+ * @parent housingComponent
  */
 module topPanePiece(
     x_size = symfloppy_box_x_size,
@@ -65,4 +65,8 @@ module topPanePiece(
 }
 
 
+/**
+ * @png
+ * @colorscheme BeforeDawn
+ */
 topPanePiece();
