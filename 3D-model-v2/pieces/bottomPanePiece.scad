@@ -1,7 +1,6 @@
 use <./subpieces/centeredPaneSubPiece.scad>
 use <./subpieces/roundedPane.scad>
-include <../libraries/commons.scad>;
-
+use <../openscad_modules/commons/forEachCoord.scad>
 
 include <../configurations/global.scad>
 

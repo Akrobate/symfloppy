@@ -5,6 +5,7 @@
   "author": "",
   "repository": "",
   "dependencies": {
+    "commons": "https://gitlab.com/openscad-modules/commons.git#0.0.2",
     "housing": "https://gitlab.com/openscad-modules/housing.git#0.0.5"
   }
 }
