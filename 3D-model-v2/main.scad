@@ -3,7 +3,7 @@ use <./assets/buttonAsset.scad>
 use <./assets/usb-connector/usbConnector.scad>
 use <./assets/FloppyDrive/FloppyDrive.scad>
 
-include <./configurations/global.scad>
+include <configurations/global.scad>
 
 SHOW_FLOPPY_DRIVE = true;
 SHOW_BUTTON_ASSETS = true;

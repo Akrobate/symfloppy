@@ -1,8 +1,6 @@
-use <./subpieces/centeredPaneSubPiece.scad>
-use <./subpieces/roundedPane.scad>
 use <../envelopes/floppyFixationThrows.scad>
-use <../envelopes/buttonAssetThrow.scad>
 
+use <../openscad_modules/housing/roundedPane.scad>
 use <../openscad_modules/commons/forEachCoord.scad>
 
 include <../configurations/global.scad>
