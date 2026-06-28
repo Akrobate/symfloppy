@@ -1,5 +1,4 @@
 include <../configurations/global.scad>;
-include <../libraries/commons.scad>;
 
 use <../openscad_modules/housing/housingBorder.scad>
 use <../envelopes/usbConnectorThrowEnveloppe.scad>
