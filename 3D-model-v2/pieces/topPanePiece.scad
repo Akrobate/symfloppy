@@ -28,8 +28,14 @@ module topPanePiece(
 
 ) {
 
-    echo("topPanePiece", x_size=x_size, y_size=y_size);
+    floppy_cables_throws_round_radius = 3;
+    floppy_cables_throws_main_coords = [x_size - 30, y_size - 10];
+    floppy_cables_throws_main_size = [20, 6, 5];
 
+    floppy_cables_throws_power_coords = [30, y_size - 10];
+    floppy_cables_throws_power_size = [20, 6, 5];
+
+    echo("topPanePiece", x_size=x_size, y_size=y_size);
     throws_coords_list = [
         [facade_throws_margin, facade_throws_margin],
         [facade_throws_margin, y_size - facade_throws_margin],
@@ -46,11 +52,13 @@ module topPanePiece(
             $fn = _fn
         );
 
+
+
         translate([0, floppy_y_offset, 0])
-        floppyFixationThrows(
-            z_size = pane_thickness * 4,
-            throws_diameter = throws_diameter
-        );
+            floppyFixationThrows(
+                z_size = pane_thickness * 4,
+                throws_diameter = throws_diameter
+            );
 
         translate([-x_size / 2, -y_size / 2])
             forEachCoord(throws_coords_list)
@@ -60,8 +68,36 @@ module topPanePiece(
                     center = true,
                     $fn = 100
                 );
+        
+        translate([
+            -x_size / 2 + floppy_cables_throws_main_coords.x,
+            -y_size / 2 + floppy_cables_throws_main_coords.y
+        ])
+            #roundedPane(
+                floppy_cables_throws_main_size,
+                r1 = floppy_cables_throws_round_radius,
+                r2 = floppy_cables_throws_round_radius,
+                center = true,
+                $fn = _fn
+            );
+
+        translate([
+            -x_size / 2 + floppy_cables_throws_power_coords.x,
+            -y_size / 2 + floppy_cables_throws_power_coords.y
+        ])
+            #roundedPane(
+                floppy_cables_throws_power_size,
+                r1 = floppy_cables_throws_round_radius,
+                r2 = floppy_cables_throws_round_radius,
+                center = true,
+                $fn = _fn
+            );
+        
     }
 }
+
+
+
 
 
 /**

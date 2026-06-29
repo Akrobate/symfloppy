@@ -32,8 +32,7 @@ module housingComponent(
             translate([0, 0, z_size / 2 - pane_thickness / 2])
                 topPanePiece();
 
-            
-            #translate([0, 0, -(z_size / 2 - pane_thickness / 2) - 00])
+            #translate([0, 0, -(z_size / 2 - pane_thickness / 2)])
                 bottomPanePiece();
             
         }
@@ -41,4 +40,8 @@ module housingComponent(
 }
 
 
+/**
+ * @png
+ * @colorscheme BeforeDawn
+ */
 housingComponent();
