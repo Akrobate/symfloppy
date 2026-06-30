@@ -52,8 +52,6 @@ module topPanePiece(
             $fn = _fn
         );
 
-
-
         translate([0, floppy_y_offset, 0])
             floppyFixationThrows(
                 z_size = pane_thickness * 4,
@@ -97,11 +95,10 @@ module topPanePiece(
 }
 
 
-
-
-
 /**
+ * @stl
  * @png
  * @colorscheme BeforeDawn
+ * @view axes,scales
  */
 topPanePiece();

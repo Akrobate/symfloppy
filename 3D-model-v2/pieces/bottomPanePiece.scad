@@ -52,8 +52,9 @@ module bottomPanePiece(
 
 
 /**
+ * @stl
  * @png
  * @colorscheme BeforeDawn
+ * @view axes,scales
  */
 bottomPanePiece();
-

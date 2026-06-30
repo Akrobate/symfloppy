@@ -61,9 +61,10 @@ module housingBorderPiece(
 }
 
 
-
 /**
+ * @stl
  * @png
  * @colorscheme BeforeDawn
+ * @view axes,scales
  */
 housingBorderPiece();
